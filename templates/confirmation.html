@@ -1,0 +1,57 @@
+{% extends 'base.html' %} {% block title %}Tours{% endblock %} {% block content
+%}
+<section class="booking-confirmation-section">
+  <div class="tour-image-container">
+    <img src="../static/images/tours/{{booking_details['image']}}" alt="" />
+
+    <div class="icon-text-container">
+      <svg class="icon">
+        <use href="../static/sprite.svg#map" />
+      </svg>
+      <p>{{booking_details["location"]}}</p>
+    </div>
+  </div>
+
+  <div class="confirmation-details-container">
+    <div>
+      <p>TRANSACTION ID</p>
+      <p class="transaction_id">{{booking_details["transaction_id"]}}</p>
+    </div>
+    <div class="confirmation-text-container">
+      <img src="../static/images/yes.png" alt="" width="50" height="50" />
+      <h1>Congratulations, Booking confirmed</h1>
+    </div>
+    <div class="tour-details-header">
+      <div class="icon-text-container">
+        <svg class="icon">
+          <use href="../static/sprite.svg#clock" />
+        </svg>
+        <p>{{booking_details["duration"]}}</p>
+      </div>
+      <div class="icon-text-container">
+        <p>{{booking_details["rating"]}}</p>
+        <svg class="icon">
+          <use href="../static/sprite.svg#star" />
+        </svg>
+      </div>
+    </div>
+    <p class="tour-name">{{booking_details["name"]}}</p>
+
+    <h1 class="total_price">
+      Total price ₹ {{booking_details["total_price"]}}
+    </h1>
+
+    <div class="icon-text-container">
+      <svg class="icon">
+        <use href="../static/sprite.svg#user" />
+      </svg>
+      <p>total people {{booking_details["total_people"]}}</p>
+    </div>
+
+    <button class="button">
+      <a href="/bookings">Go to bookings</a>
+    </button>
+  </div>
+</section>
+
+{% endblock %}

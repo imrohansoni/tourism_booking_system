@@ -1,0 +1,103 @@
+{% extends 'base.html' %} {% block title %}{{tour['name']}}{% endblock %} {% block content
+%}
+<section class="tours-details-section">
+  <div class="tour-image-container">
+    <img src="../static/images/tours/{{tour['image']}}" alt="" />
+    <div class="icon-text-container">
+      <svg class="icon">
+        <use href="../static/sprite.svg#map" />
+      </svg>
+      <p>{{tour['location']}}</p>
+    </div>
+  </div>
+  <div class="tour-details-container">
+      <div class="tour-details-header">
+        <div class="icon-text-container">
+          <svg class="icon">
+            <use href="../static/sprite.svg#clock" />
+          </svg>
+          <p>{{tour['duration']}}</p>
+        </div>
+        <div class="icon-text-container">
+          <p>{{tour['rating']}}</p>
+          <svg class="icon">
+            <use href="../static/sprite.svg#star" />
+          </svg>
+        </div>
+      </div>
+      <p class="tour-name">{{tour['name']}}</p>
+      <p class="small-description">{{tour['small_description']}}</p>
+
+      <p class="small-description">{{tour['description']}}</p>
+
+      <div class="icon-text-container">
+        <svg class="icon">
+          <use href="../static/sprite.svg#user" />
+        </svg>
+        <p>₹ {{tour['price_per_person']}}</p>
+      </div>
+       <div class="person-counter">
+      <button class="decrement" id="decrementButton">-</button>
+      <p class="counter" id="counterText">1</p>
+      <button class="increment" id="incrementButton">+</button>
+    </div>
+    {% if 'user_id' in session %}
+    <form action="/bookings" method="post" class="tour-booking-form">
+      <input
+        type="number"
+        name="total_people"
+        value="1"
+        id="totalPeopleInput"
+      />
+      <input type="text" name="user_id" value="{{user['id']}}" />
+      <input type="text" name="tour_id" value="{{tour['id']}}" />
+      <button class="button" id="bookNowButton">
+        PAY {{tour['price_per_person']}} AND BOOK NOW
+      </button>
+    </form>
+    {% else %}
+    <a href="/login">
+      <button class="button" id="bookNowButton">
+        PAY {{tour['price_per_person']}} AND BOOK NOW
+      </button>
+    </a>
+
+    {% endif %}
+    </div>
+  </div>
+</section>
+
+<script>
+  let counter = 1;
+    const incrementButton = document.getElementById('incrementButton');
+    const decrementButton = document.getElementById('decrementButton');
+    const counterText = document.getElementById('counterText');
+    const totalPeopleInput = document.getElementById("totalPeopleInput")
+
+    const bookNowButton = document.getElementById('bookNowButton');
+
+    const tourPrice = {{ tour['price_per_person'] }};
+
+    function updateCounterAndPrice() {
+      counterText.textContent = counter;
+      const totalPrice = tourPrice * counter;
+      if(totalPeopleInput){
+        totalPeopleInput.value = counter;
+      }
+      bookNowButton.textContent = `PAY ₹ ${totalPrice} AND BOOK NOW`;
+    }
+
+    incrementButton.addEventListener('click', () => {
+      counter++;
+      updateCounterAndPrice();
+    });
+
+    decrementButton.addEventListener('click', () => {
+      if (counter > 1) {
+        counter--;
+        updateCounterAndPrice();
+      }
+    });
+    updateCounterAndPrice();
+</script>
+{% endblock %}

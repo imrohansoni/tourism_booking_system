@@ -1,0 +1,56 @@
+{% extends 'base.html' %} {% block title %}Bookings{% endblock %} {% block
+content %}
+<section class="bookings-section">
+  <div class="tour-card-container">
+    {% if bookings.__len__() < 1 %}
+    <h1>No Bookings found</h1>
+    {% else %} {% for booking in bookings %}
+    <div class="tour-card">
+      <div class="tour-image-container">
+        <img src="../static/images/tours/{{booking['image']}}" alt="" />
+        <div class="icon-text-container">
+          <svg class="icon">
+            <use href="../static/sprite.svg#map" />
+          </svg>
+          <p>{{booking['location']}}</p>
+        </div>
+      </div>
+      <div class="tour-details">
+        <div class="booking-status booking-{{booking['booking_status']}}">
+          booking {{booking['booking_status']}}
+        </div>
+        <div class="tour-details-header">
+          <div class="icon-text-container">
+            <svg class="icon">
+              <use href="../static/sprite.svg#clock" />
+            </svg>
+            <p>{{booking['duration']}}</p>
+          </div>
+          <div class="icon-text-container">
+            <svg class="icon">
+              <use href="../static/sprite.svg#user" />
+            </svg>
+            <p>{{booking['total_people']}}</p>
+          </div>
+        </div>
+
+        <p class="tour-name">{{booking['name']}}</p>
+
+        <div>
+          <p class="transaction_id_text">TRANSACTION ID</p>
+          <p class="transaction_id">{{booking["transaction_id"]}}</p>
+        </div>
+
+        <p>₹ {{booking['total_price']}}</p>
+        <p class="booking-date">Booked on {{booking["created_at"]}}</p>
+        {% if booking['booking_status'] == 'confirmed' %}
+        <button class="button">
+          <a href="/bookings/{{booking['id']}}/cancel">cancel booking</a>
+        </button>
+        {% endif %}
+      </div>
+    </div>
+    {% endfor %} {% endif %}
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'base.html' %} {% block title %}Tours{% endblock %} {% block content
+%}
+<section class="tours-section">
+  <div class="tour-card-container">
+    {% for tour in tours %}
+    <a href="/tours/{{tour['slug']}}">
+      <div class="tour-card">
+        <div class="tour-image-container">
+          <img src="../static/images/tours/{{tour['image']}}" alt="" />
+          <div class="icon-text-container">
+            <svg class="icon">
+              <use href="../static/sprite.svg#map" />
+            </svg>
+            <p>{{tour['location']}}</p>
+          </div>
+        </div>
+        <div class="tour-details">
+          <div class="tour-details-header">
+            <div class="icon-text-container">
+              <p>{{tour['rating']}}</p>
+              <svg class="icon">
+                <use href="../static/sprite.svg#star" />
+              </svg>
+            </div>
+
+            <div class="icon-text-container">
+              <svg class="icon">
+                <use href="../static/sprite.svg#clock" />
+              </svg>
+              <p>{{tour['duration']}}</p>
+            </div>
+          </div>
+          <p class="tour-name">{{tour['name']}}</p>
+          <p class="small-description">{{tour['small_description']}}</p>
+
+          <div class="icon-text-container">
+            <svg class="icon">
+              <use href="../static/sprite.svg#user" />
+            </svg>
+            <p>₹ {{tour['price_per_person']}}</p>
+          </div>
+        </div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}
