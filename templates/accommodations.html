@@ -1,0 +1,87 @@
+{% extends 'base.html' %} {% block title %}Hotels{% endblock %} {% block content
+%}
+<section class="accommodations-section">
+  <div class="tour-card-container">
+    {% for a in acc %}
+    <a href="{{a['map']}}">
+      <div class="tour-card">
+        <div class="tour-image-container">
+          <img src="../static/images/hotels/{{a['image']}}" alt="" />
+
+          <div class="hotel-features">
+            {% if a['wifi'] == True %}
+            <div class="icon-text-container hotel-location">
+              <svg class="icon">
+                <use href="../static/sprite.svg#wifi" />
+              </svg>
+              <p>wifi</p>
+            </div>
+            {% endif %} {% if a['a_c'] == True %}
+            <div class="icon-text-container hotel-location">
+              <svg class="icon">
+                <use href="../static/sprite.svg#ac" />
+              </svg>
+              <p>air conditioner</p>
+            </div>
+            {% endif %} {% if a['room_service'] == True %}
+            <div class="icon-text-container hotel-location">
+              <svg class="icon">
+                <use href="../static/sprite.svg#room-service" />
+              </svg>
+              <p>room service</p>
+            </div>
+            {% endif %} {% if a['house_keeping'] == True %}
+            <div class="icon-text-container hotel-location">
+              <svg class="icon">
+                <use href="../static/sprite.svg#person-apron" />
+              </svg>
+              <p>house keeping</p>
+            </div>
+            {% endif %} {% if a['restaurant'] == True %}
+            <div class="icon-text-container hotel-location">
+              <svg class="icon">
+                <use href="../static/sprite.svg#menu-book" />
+              </svg>
+              <p>restaurant</p>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+        <div class="tour-details">
+          <div class="tour-details-header">
+            <div class="icon-text-container">
+              <p>{{a['rating']}}</p>
+              <svg class="icon">
+                <use href="../static/sprite.svg#star" />
+              </svg>
+            </div>
+          </div>
+          <div class="icon-text-container hotel-location">
+            <svg class="icon">
+              <use href="../static/sprite.svg#map" />
+            </svg>
+            <p>{{a['location']}}</p>
+          </div>
+          <p class="tour-name">{{a['name']}}</p>
+
+          <div class="icon-text-container">
+            <div class="icon-text-container">
+              <svg class="icon">
+                <use href="../static/sprite.svg#bed" />
+              </svg>
+              <p>{{a['bed']}} bed</p>
+            </div>
+            <div class="icon-text-container">
+              <svg class="icon">
+                <use href="../static/sprite.svg#user" />
+              </svg>
+              <p>₹ {{a['price']}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

@@ -26,24 +26,28 @@
         </div>
       </a>
       <ul>
-        <li>
+        <li {% if active_link == 'home' %}class="active"{% endif %}>
           <a href="/">home</a>
         </li>
-        <li>
+        <li {% if active_link == 'tours' %}class="active"{% endif %}>
           <a href="/tours">tours</a>
         </li>
-        <li>
+        <li {% if active_link == 'accommodations' %}class="active"{% endif %}>
+          <a href="/accommodations">hotels</a>
+        </li>
+        <li {% if active_link == 'bookings' %}class="active"{% endif %}>
           <a href="/bookings">bookings</a>
         </li>
-        <li>
+        <li {% if active_link == 'about' %}class="active"{% endif %}>
           <a href="/about">about</a>
         </li>
         {% if user %}
+        <li {% if active_link == 'feedback' %}class="active"{% endif %}>
+          <a href="/feedback">feedback</a>
+        </li>
         <li>
           <div class="account-link">
-            <svg class="icon">
-              <use href="../static/sprite.svg#user-circle" />
-            </svg>
+            <img src="../static/icon/user.png" alt="">
             <a href="/account"
               >{{ user["firstname"] }} {{ user["lastname"] }}</a
             >

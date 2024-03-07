@@ -176,3 +176,25 @@
     overflow: hidden;
     position: relative;
 }
+
+.hotel-location p {
+    font-size: 14px;
+}
+
+.hotel-location .icon {
+    width: 16px;
+    height: 16px;
+}
+
+.hotel-features {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 12px;
+}
+
+.accommodations-section .tour-image-container .icon-text-container {
+    position: static;
+}

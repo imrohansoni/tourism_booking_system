@@ -9,8 +9,10 @@ def authenticate(handler):
         if 'user_id' in session:
             user_id = session["user_id"]
             cursor = db.cursor()
+
             cursor.execute(
                 "SELECT id, firstname, lastname, mobile_number, user_type FROM users WHERE id=%s", [user_id])
+
             user = cursor.fetchall()[0]
             g.user_data = {
                 "id": user[0],

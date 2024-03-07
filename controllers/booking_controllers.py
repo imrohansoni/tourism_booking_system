@@ -35,7 +35,7 @@ def create_booking():
         "transaction_id": transaction_id,
         "total_price": total_price,
         "total_people": data["total_people"]
-    }, user=g.get("user_data"))
+    }, user=g.get("user_data"), active_link="tours")
 
 
 @authenticate
@@ -69,7 +69,7 @@ def render_bookings():
             "id": booking[9]
         })
 
-    return render_template("bookings.html", user=user, bookings=booking_list)
+    return render_template("bookings.html", user=user, bookings=booking_list, active_link="bookings")
 
 
 @authenticate

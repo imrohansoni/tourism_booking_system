@@ -22,7 +22,7 @@ def render_tours():
             "slug": tour[7]
         })
     cursor.close()
-    return render_template("tours.html", user=g.get("user_data"), tours=tour_list)
+    return render_template("tours.html", user=g.get("user_data"), tours=tour_list, active_link="tours")
 
 
 @authenticate
@@ -43,4 +43,4 @@ def render_tours_details(tour_slug):
         "rating": tour[8],
         "slug": tour[9]
     })
-    return render_template("tour-details.html", user=g.get("user_data"), tour=tour_details)
+    return render_template("tour-details.html", user=g.get("user_data"), tour=tour_details, active_link="tours")
